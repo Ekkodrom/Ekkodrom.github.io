@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="da">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ekkodrøms værktøjer</title>
+  <meta name="description" content="Små danske naturværktøjer: Fugle Kalender, Svampe Kalender og Kend dit træ.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='15' fill='%231f4d3a'/><path d='M16 6c-5 5-6 10-3 15h6c3-5 2-10-3-15zM16 21v6' stroke='%23fff' stroke-width='2' fill='none' stroke-linecap='round'/></svg>">
+  <style>
+    :root {
+      --bg: #f5f4ee;
+      --surface: #ffffff;
+      --text: #1d2420;
+      --muted: #5f6b64;
+      --line: #e2ded3;
+      --accent: #1f4d3a;
+      --fugl: #1f4d3a;
+      --fugl-soft: #e3eee7;
+      --svamp: #6b4226;
+      --svamp-soft: #f2e8dc;
+      --trae: #2f5d34;
+      --trae-soft: #e2ecdf;
+      --warn: #8a2a1e;
+      --shadow: 0 1px 2px rgba(0,0,0,.04), 0 4px 16px rgba(0,0,0,.05);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --bg: #141815;
+        --surface: #1c221e;
+        --text: #e8ece8;
+        --muted: #9aa69e;
+        --line: #2c342f;
+        --accent: #8cc4a6;
+        --fugl: #8cc4a6;
+        --fugl-soft: #213029;
+        --svamp: #d9b48c;
+        --svamp-soft: #2f251c;
+        --trae: #9cc99f;
+        --trae-soft: #213022;
+        --warn: #f0a194;
+        --shadow: none;
+      }
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    main {
+      width: 100%;
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 56px 16px 32px;
+      flex: 1;
+    }
+    header { margin-bottom: 36px; }
+    h1 {
+      font-size: clamp(1.9rem, 5vw, 2.6rem);
+      line-height: 1.15;
+      margin: 0 0 8px;
+      letter-spacing: -0.02em;
+    }
+    .lead { color: var(--muted); margin: 0; max-width: 46ch; font-size: 1.05rem; }
+    .byline { color: var(--muted); font-size: .8rem; margin: 10px 0 0; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+    }
+    .card {
+      --c: var(--accent);
+      --c-soft: var(--line);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 22px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+      color: inherit;
+      text-decoration: none;
+      transition: transform .15s ease, border-color .15s ease;
+    }
+    .card:hover, .card:focus-visible { transform: translateY(-2px); border-color: var(--c); }
+    .card:focus-visible { outline: 2px solid var(--c); outline-offset: 2px; }
+    .card.fugl  { --c: var(--fugl);  --c-soft: var(--fugl-soft); }
+    .card.svamp { --c: var(--svamp); --c-soft: var(--svamp-soft); }
+    .card.trae  { --c: var(--trae);  --c-soft: var(--trae-soft); }
+    .icon {
+      width: 48px; height: 48px;
+      border-radius: 12px;
+      background: var(--c-soft);
+      color: var(--c);
+      display: grid; place-items: center;
+    }
+    .icon svg { width: 28px; height: 28px; }
+    .card h2 { margin: 4px 0 0; font-size: 1.25rem; }
+    .card p { margin: 0; color: var(--muted); font-size: .95rem; }
+    .warn {
+      font-size: .85rem;
+      color: var(--warn);
+      font-weight: 600;
+      border-left: 3px solid var(--warn);
+      padding-left: 10px;
+    }
+    .go {
+      margin-top: auto;
+      padding-top: 6px;
+      color: var(--c);
+      font-weight: 600;
+      font-size: .95rem;
+    }
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: .75rem;
+      padding: 24px 16px 32px;
+    }
+    footer a { color: inherit; }
+    @media (prefers-reduced-motion: reduce) { .card { transition: none; } .card:hover { transform: none; } }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Ekkodrøms værktøjer</h1>
+      <p class="lead">Små gratis værktøjer til dig, der vil lære den danske natur bedre at kende.</p>
+      <p class="byline">Lavet af Thomas Lauth</p>
+    </header>
+
+    <div class="grid">
+      <a class="card fugl" href="https://ekkodrom.github.io/fugle-kalender/">
+        <span class="icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 7h.01"/><path d="M3.4 18H12a8 8 0 0 0 8-8V7a4 4 0 0 0-7.28-2.3L2 20"/><path d="m20 7 2 .5-2 .5"/><path d="M10 18v3"/><path d="M14 17.75V21"/><path d="M7 18a6 6 0 0 0 3.84-10.61"/></svg>
+        </span>
+        <h2>Fugle Kalender</h2>
+        <p>Se hvilke fugle der kan ses i Danmark i dag – eller på en valgt dato – og planlæg din fugletur eller dit Big Year.</p>
+        <span class="go">Åbn Fugle Kalender →</span>
+      </a>
+
+      <a class="card svamp" href="https://ekkodrom.github.io/svampe-kalender/">
+        <span class="icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3C7 3 3 6.5 3 11h18c0-4.5-4-8-9-8z"/><path d="M9.5 11v6.5a2.5 2.5 0 0 0 5 0V11"/><circle cx="9" cy="7" r=".6" fill="currentColor"/><circle cx="14.5" cy="6" r=".6" fill="currentColor"/></svg>
+        </span>
+        <h2>Svampe Kalender</h2>
+        <p>Se hvilke svampe der kan findes i Danmark i dag – eller på en valgt dato – og planlæg din svampetur.</p>
+        <p class="warn">Ikke en sikker guide. Spis aldrig en svamp ud fra denne side – få den altid kontrolleret af en svampekontrollant.</p>
+        <span class="go">Åbn Svampe Kalender →</span>
+      </a>
+
+      <a class="card trae" href="https://ekkodrom.github.io/kend-dit-trae/">
+        <span class="icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22v-7"/><path d="M12 15 9 12"/><path d="M12 13l3-2.5"/><path d="M7 15a4 4 0 0 1-1.5-7.7A5 5 0 0 1 12 2a5 5 0 0 1 6.5 5.3A4 4 0 0 1 17 15z"/></svg>
+        </span>
+        <h2>Kend dit træ</h2>
+        <p>Billedquiz der hjælper dig med at lære de danske træer at kende – på barken, bladene og frugterne.</p>
+        <span class="go">Åbn Kend dit træ →</span>
+      </a>
+    </div>
+  </main>
+
+  <footer>
+    © <span id="aar">2026</span> Ekkodrøm · Lavet af Thomas Lauth
+  </footer>
+  <script>document.getElementById('aar').textContent = new Date().getFullYear();</script>
+</body>
+</html>
